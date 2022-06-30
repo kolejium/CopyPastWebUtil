@@ -9,7 +9,7 @@ namespace CommunityOfDevelopers.ExternalShare.Features.Common
     public class CommonController : ControllerBase
     {
         [HttpGet("site")]
-        public async Task<IActionResult> GetSite(string url, CancellationToken token)
+        public async Task<IActionResult> GetSite([FromQuery]string url, CancellationToken token)
         {
             using var client = new HttpClient();
 
