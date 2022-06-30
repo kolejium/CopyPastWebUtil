@@ -1,0 +1,45 @@
+.search-bar-wrapper {
+    display: flex;
+    background-color: white;
+    border-radius: 1.5rem;
+    border: 1px solid #dfe1e5;
+
+    .search-bar {
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        align-items: center;
+
+        padding: 0.2rem .5rem;
+
+        input {
+            border: none;
+            background-color: transparent;
+            outline: none;
+            word-wrap: break-word;
+        }
+
+        img {
+            max-width: 1rem;
+            max-height: 1rem;
+        }
+
+        .reset {
+            display: none;
+        }
+
+
+        input:valid + .reset {
+            display: block;
+        }
+
+
+        :last-child {
+            margin-left: .25rem;
+        }
+
+        :first-child {
+            margin-right: .25rem;
+        }
+    }
+}
