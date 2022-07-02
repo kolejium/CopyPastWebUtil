@@ -1,10 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, SecurityContext } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { BehaviorSubject, map, Observable } from 'rxjs';
+import { ApiService } from './core/services/api.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  source!: SafeResourceUrl;
   title = 'copy-paste-web-util';
+
+  constructor(private apiService: ApiService, private domSanitizer: DomSanitizer) { }
+
+  ngOnInit(): void {
+  }
+
+  openSource(value: string) {
+    this.source = this.domSanitizer.bypassSecurityTrustResourceUrl(this.apiService.proxySiteByUrl(value));
+
+    /*
+    this.apiService.getSiteByUrl(value).pipe(map(z => {
+      return atob(z)
+    })).subscribe(z => this.source = z);
+    */
+  }
 }

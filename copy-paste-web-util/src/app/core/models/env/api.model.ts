@@ -1,0 +1,3 @@
+interface ApiModel {
+    externalShare: ExternalShare;
+}

@@ -1,1 +1,6 @@
-<app-search-bar />
+<div>
+    <app-search-bar (queryEvent)="openSource($event)"></app-search-bar>
+    <div class="row space-between">
+        <app-source-view [value]="source"></app-source-view>
+    </div>
+</div>

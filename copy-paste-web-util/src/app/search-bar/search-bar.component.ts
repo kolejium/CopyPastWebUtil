@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { SearchBarStore } from '../core/stores/search-bar.store';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-search-bar',
@@ -7,17 +6,19 @@ import { SearchBarStore } from '../core/stores/search-bar.store';
   styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent implements OnInit {
-  value!: string;
+  value: string | undefined;
+  @Output() queryEvent = new EventEmitter<string>();
 
-  constructor(private searchBarStore: SearchBarStore) { }
+  constructor() { }
 
 
   onEnter() {
-    this.searchBarStore.setQuery(this.value);
+    this.queryEvent.emit(this.value);
   }
   
-  onReset() {
-    this.value = '';
+  onReset() { 
+    this.value = undefined;
+    this.queryEvent.emit(this.value);
   }
 
   ngOnInit(): void {
