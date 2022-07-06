@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import apiJson from '../../../environments/env.config.json';
 import { Observable } from "rxjs";
@@ -13,11 +13,13 @@ export class ApiService {
 
     }
 
-    getSiteByUrl(url: string) : Observable<any> {
-        return this.http.get(`${apiJson.Api.ExtenalShare.BaseUrl}${apiJson.Api.ExtenalShare.GetSiteHtml}?url=${url}`, { responseType: "text" });
+    getUrlForGetSiteByUrl(url: string) : string {
+        return `${apiJson.Api.ExtenalShare.BaseUrl}${apiJson.Api.ExtenalShare.Proxy}?url=${url}&proxy=${apiJson.Api.ExtenalShare.BaseUrl}${apiJson.Api.ExtenalShare.Proxy}?url=`;
     }
 
-    proxySiteByUrl(url: string) : string {
-        return `${apiJson.Api.ExtenalShare.BaseUrl}${apiJson.Api.ExtenalShare.ProxySite}?url=${url}`;
+    getSiteByUrl(url: string) : Observable<any> {
+        let params = new HttpParams().set("url", url).set("proxy", `${apiJson.Api.ExtenalShare.BaseUrl}${apiJson.Api.ExtenalShare.Proxy}?url=`);
+        let query = `${apiJson.Api.ExtenalShare.BaseUrl}${apiJson.Api.ExtenalShare.Proxy}`;
+        return this.http.get(query, { params: params, responseType: "text" });
     }
 }

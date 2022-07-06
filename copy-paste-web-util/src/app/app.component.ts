@@ -18,12 +18,9 @@ export class AppComponent implements OnInit {
   }
 
   openSource(value: string) {
-    this.source = this.domSanitizer.bypassSecurityTrustResourceUrl(this.apiService.proxySiteByUrl(value));
+    //this.source = this.domSanitizer.bypassSecurityTrustResourceUrl(this.apiService.proxySiteByUrl(value));
 
-    /*
-    this.apiService.getSiteByUrl(value).pipe(map(z => {
-      return atob(z)
-    })).subscribe(z => this.source = z);
-    */
+    this.source = this.domSanitizer.bypassSecurityTrustResourceUrl(this.apiService.getUrlForGetSiteByUrl(value));
+    //this.apiService.getSiteByUrl(value).subscribe((z : string) => this.source = this.domSanitizer.bypassSecurityTrustResourceUrl(z));
   }
 }

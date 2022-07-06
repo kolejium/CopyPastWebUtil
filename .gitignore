@@ -58,3 +58,6 @@ package-lock.json
 
 # Husky
 .husky/_
+/CommunityOfDevelopers.ExternalShare.Dto/obj
+/CommunityOfDevelopers.ExternalShare.Test/obj
+/CommunityOfDevelopers.ExternalShare.Dto/bin/Debug/net6.0
